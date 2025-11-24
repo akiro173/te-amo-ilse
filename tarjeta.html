@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perdóname 💗</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: #ffe6e6;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    /* --- PANTALLA DE ENTRADA --- */
+    #startScreen {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #ffd6d6;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    #startScreen button {
+        padding: 15px 25px;
+        background: #ff4d6d;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+
+    #startScreen button:active { transform: scale(0.92); }
+
+    /* --- Título --- */
+    h1 {
+        color: #c70039;
+        font-size: 28px;
+        margin-top: 25px;
+        padding: 0 10px;
+    }
+
+    /* Contenedor principal */
+    .container {
+        position: relative;
+        max-width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+    /* --- CORAZÓN --- */
+    .heart {
+        font-size: 120px;
+        color: #ff4d6d;
+        animation: beat 1.4s infinite;
+        margin-top: 10px;
+    }
+
+    @keyframes beat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.12); }
+    }
+
+    /* Texto */
+    .text-box {
+        max-width: 90%;
+        margin: 0 auto 15px;
+        color: #b3002d;
+        font-size: 18px;
+        line-height: 1.4;
+        font-weight: bold;
+    }
+
+    /* Flechas */
+    .nav {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        background: #ff4d6d;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .btn:active { transform: scale(0.9); }
+
+    /* Número página */
+    #pageNumber {
+        font-size: 20px;
+        font-weight: bold;
+        color: #c70039;
+    }
+
+    @media (max-width: 480px) {
+        h1 { font-size: 24px; }
+        .heart { font-size: 90px; }
+        .text-box { font-size: 16px; }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- ---------------------- PANTALLA DE ENTRADA ---------------------- -->
+<div id="startScreen">
+    <h2 style="color:#c70039; font-size:26px;">Tengo algo para ti… 💗</h2>
+    <button onclick="enterPage()">Entrar 💞</button>
+</div>
+<!-- ------------------------------------------------------------------- -->
+
+<h1 id="mainTitle" style="display:none;">Perdóname por ser un tonto ❤️</h1>
+
+<div class="nav" id="navBtns" style="display:none;">
+    <button class="btn" onclick="prevPage()">◀</button>
+    <button class="btn" onclick="nextPage()">▶</button>
+</div>
+
+<p id="pageNumber" style="display:none;">Página 1</p>
+
+<div class="container" id="contentBox" style="display:none;">
+    <p class="text-box" id="textBox"></p>
+
+    <!-- CORAZÓN REEMPLAZANDO LA IMAGEN -->
+    <div class="heart">❤️</div>
+</div>
+
+<script>
+/* ---- TEXTOS ---- */
+const pages = [
+    "Perdóname por mis fallas, por mis enojos, por no saber siempre qué decir. Pero nunca dudes que te quiero… demasiado.",
+    "Soy un tonto que está enamorado de ti y solo de ti. Recuerdo cada palabra tuya recordándome que siempre me elegirías a mí… ¿por qué? Porque soy yo. Y eso nunca lo olvidaré.",
+    "Gracias por seguir aquí. Por aguantarme. Por no soltarme. Yo voy a mejorar, por ti, por mí, por nosotros. Te amo."
+];
+
+let currentPage = 0;
+
+/* ---- CAMBIAR PAGINAS ---- */
+function updatePage() {
+    document.getElementById("textBox").innerText = pages[currentPage];
+    document.getElementById("pageNumber").innerText = "Página " + (currentPage + 1);
+}
+
+function nextPage() {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePage();
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) {
+        currentPage--;
+        updatePage();
+    }
+}
+
+/* ---- ENTRAR A LA PÁGINA ---- */
+function enterPage() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("mainTitle").style.display = "block";
+    document.getElementById("navBtns").style.display = "flex";
+    document.getElementById("pageNumber").style.display = "block";
+    document.getElementById("contentBox").style.display = "block";
+
+    updatePage();
+}
+
+</script>
+
+</body>
+</html>
